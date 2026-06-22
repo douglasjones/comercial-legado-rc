@@ -1,0 +1,42 @@
+services:
+  web:
+    build: .
+    container_name: crm_web
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    env_file:
+      - .env
+    environment:
+      - UPLOAD_BASE_DIR=${UPLOAD_BASE_DIR:-/var/appdata/uploads}
+      - DB_HOST=${DB_HOST:-db}
+      - DB_NAME=${DB_NAME:-wwgepr_crm_antigo}
+      - DB_USER=${DB_USER:-crm_user}
+      - DB_PASS=${DB_PASS}
+    volumes:
+      - ./:/var/www/html
+      - uploads_data:/var/appdata/uploads
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    container_name: crm_db
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    command: --sql-mode=""
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME:-wwgepr_crm_antigo}
+      MYSQL_USER: ${DB_USER:-crm_user}
+      MYSQL_PASSWORD: ${DB_PASS}
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+  uploads_data:

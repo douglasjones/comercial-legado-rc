@@ -1,0 +1,60 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rc_web
+    restart: unless-stopped
+    ports:
+      - "8092:80"
+    env_file:
+      - .env.production
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_URL: ${APP_URL}
+      MAIL_ENABLED: ${MAIL_ENABLED}
+      UPLOAD_BASE_DIR: ${UPLOAD_BASE_DIR}
+      UPLOAD_MAX_SIZE: ${UPLOAD_MAX_SIZE}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE}
+      SESSION_COOKIE_SAMESITE: ${SESSION_COOKIE_SAMESITE}
+      TZ: ${TZ}
+    volumes:
+      - rc_uploads_data:${UPLOAD_BASE_DIR}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:5.7
+    container_name: rc_db
+    restart: unless-stopped
+    command:
+      - --sql-mode=
+      - --character-set-server=${MYSQL_CHARACTER_SET_SERVER}
+      - --collation-server=${MYSQL_COLLATION_SERVER}
+    env_file:
+      - .env.production
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      TZ: ${TZ}
+    ports:
+      - "127.0.0.1:3315:3306"
+    volumes:
+      - rc_mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  rc_mysql_data:
+  rc_uploads_data:

@@ -1,0 +1,321 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18/01/2019, 15:17:00
+    Author     : Guilherme Watanabe Ferreira
+*/
+
+/* configuracao do menu */ 
+.navbar {
+  background-color: #14074f;
+}
+
+.navbar .navbar-brand {
+  color: #feffff;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+  color: #9fd3f6;
+}
+.navbar .navbar-text {
+  color: #feffff;
+}
+.navbar .navbar-text a {
+  color: #9fd3f6;
+}
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+  color: #9fd3f6; 
+}
+.navbar .navbar-nav .nav-link {
+  color: #feffff;
+  border-radius: .25rem;
+  margin: 0 0.25em;
+}
+.navbar .navbar-nav .nav-link:not(.disabled):hover,
+.navbar .navbar-nav .nav-link:not(.disabled):focus {
+  color: #9fd3f6;
+}
+.navbar .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-nav .nav-item.show .nav-link,
+.navbar .navbar-nav .nav-item.show .nav-link:hover,
+.navbar .navbar-nav .nav-item.show .nav-link:focus {
+  color: #9fd3f6;
+  background-color: #0881c3;
+}
+.navbar .navbar-toggle {
+  border-color: #0881c3;
+}
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+  background-color: #0881c3;
+}
+.navbar .navbar-toggle .navbar-toggler-icon {
+  color: #feffff;
+}
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+  border-color: #feffff;
+}
+.navbar .navbar-link {
+  color: #feffff;
+}
+.navbar .navbar-link:hover {
+  color: #9fd3f6;
+}
+
+@media (max-width: 575px) {
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #feffff;
+  }
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #9fd3f6;
+  }
+  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #9fd3f6;
+    background-color: #0881c3;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #feffff;
+  }
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #9fd3f6;
+  }
+  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #9fd3f6;
+    background-color: #0881c3;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #feffff;
+  }
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #9fd3f6;
+  }
+  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #9fd3f6;
+    background-color: #0881c3;
+  }
+}
+
+@media (max-width: 1199px) {
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #feffff;
+  }
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #9fd3f6;
+  }
+  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #9fd3f6;
+    background-color: #0881c3;
+  }
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
+  color: #feffff;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+  color: #9fd3f6;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
+  color: #9fd3f6;
+  background-color: #0881c3;
+}
+/* Fim da configuração do menu */
+
+/* conteudo da página*/
+#conteudo{
+    width: 100%;
+    height: 90%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0;
+    display: flex;
+    color: #333333;    
+    overflow: hidden;
+    float: none;
+}
+
+.titulo
+{
+    font-family: verdana;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    background-color: #f37d21;
+}
+
+.fundo
+{
+    background-color: #58585B;
+}
+.linha{	
+	font-family: verdana;
+	FONT-SIZE: 12px;
+	color: #333333;
+}
+
+
+.linha_1440{	
+	font-family: verdana;
+	FONT-SIZE: 24px;
+	color: #333333;
+	background-color: #FF0000;
+}
+
+
+.linha_60{	
+	font-family: verdana;
+	FONT-SIZE: 24px;
+	color: #333333;
+	background-color: #FF00FF;
+}
+
+.linha_45{	
+	font-family: verdana;
+	FONT-SIZE: 18px;
+	color: #333333;
+	background-color: #FFAC00;
+}
+
+.linha_30{	
+	font-family: verdana;
+	FONT-SIZE: 14px;
+	color: #333333;
+	background-color: #FFE300;
+}
+
+.linha_15{	
+	font-family: verdana;
+	FONT-SIZE: 12px;
+	color: #333333;
+	background-color: #FFFF00;
+}
+
+.linha1{	
+	font-family: verdana;
+	FONT-SIZE: 12px;
+	color: #333333;
+	background-color: #D4D4D4;
+}
+
+.link
+{
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.branco
+{
+    font-size: 12px;
+}
+
+.status_agenda_retorno_concluido{
+    background:rgb(150, 255, 150);
+}
+.status_agenda_retorno_pendente {
+    background:rgb(255, 150, 150);
+}
+
+.status_agenda_retorno_reagendado{
+    background:rgb(255, 255, 0);
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px; /* Set the fixed height of the footer here */
+  line-height: 20px; /* Vertically center the text there */
+  background-color: #14074F;
+  color: white;
+}
+
+
+
+table.datatable tbody tr:hover th,
+table.datatable tbody tr:hover td {
+  background-color: #ffd;
+}
+
+table.datatable tbody td.integer {
+  text-align: right;
+  white-space: nowrap;
+}
+
+
+/*
+table.datatable tbody tr:nth-child(even) td {
+  background-color: #eee;
+}
+table.datatable tbody tr:hover th,
+table.datatable tbody tr:hover td {
+  background-color: #ffd;
+}
+
+table.datatable tbody td.integer {
+  text-align: right;
+  white-space: nowrap;
+}
+*/
+
+.function_edit{
+    cursor:pointer;
+}
+.function_painel{
+    cursor:pointer;
+}
+
+.function_delete{
+    cursor:pointer;
+}  
+
+.error{
+    color:red
+}
+
+fieldset 
+{
+    border: 1px solid #ddd !important;
+    margin: 0;
+    xmin-width: 0;
+    padding: 10px;       
+    position: relative;
+    border-radius:4px;
+    background-color:#f5f5f5;
+    padding-left:10px!important;
+}	
+
+legend
+{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom: 0px; 
+    width: 35%; 
+    border: 1px solid #ddd;
+    border-radius: 4px; 
+    padding: 5px 5px 5px 10px; 
+    background-color: #ffffff;
+}    

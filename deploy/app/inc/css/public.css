@@ -1,0 +1,105 @@
+table{
+     border-spacing: 1;
+    border-collapse: separate;
+}
+
+th
+{
+    color: white;
+    font-family: verdana;
+    font-size: 13px;
+    background-color: #F37D21;
+    text-align: center;
+}
+
+td{	
+    font-family: verdana;
+    FONT-SIZE: 12px;
+    color: #333333;
+}
+
+.titulo
+{
+    font-family: verdana;
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+    background-color: #BFBFBF;
+}
+
+.fundo
+{
+    background-color: #58585B;
+}
+.linha{	
+	font-family: verdana;
+	FONT-SIZE: 12px;
+	color: #333333;
+}
+
+
+.linha_1440{	
+	font-family: verdana;
+	FONT-SIZE: 24px;
+	color: #333333;
+	background-color: #FF0000;
+}
+
+
+.linha_60{	
+	font-family: verdana;
+	FONT-SIZE: 24px;
+	color: #333333;
+	background-color: #FF00FF;
+}
+
+.linha_45{	
+	font-family: verdana;
+	FONT-SIZE: 18px;
+	color: #333333;
+	background-color: #FFAC00;
+}
+
+.linha_30{	
+	font-family: verdana;
+	FONT-SIZE: 14px;
+	color: #333333;
+	background-color: #FFE300;
+}
+
+.linha_15{	
+	font-family: verdana;
+	FONT-SIZE: 12px;
+	color: #333333;
+	background-color: #FFFF00;
+}
+
+.linha1{	
+	font-family: verdana;
+	FONT-SIZE: 12px;
+	color: #333333;
+	background-color: #D4D4D4;
+}
+
+.link
+{
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.branco
+{
+    font-size: 12px;
+}
+
+.status_agenda_retorno_concluido{
+    background:rgb(150, 255, 150);
+}
+.status_agenda_retorno_pendente {
+    background:rgb(255, 150, 150);
+}
+
+.status_agenda_retorno_reagendado{
+    background:rgb(255, 255, 0);
+}
