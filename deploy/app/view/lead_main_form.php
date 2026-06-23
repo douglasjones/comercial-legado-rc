@@ -59,9 +59,12 @@ include_once "../inc/php/header.php";
 <div id="loader"></div>
 <div class="container col-sm-8" id="exibir" style="display:none">
     
-    <div class="row">
+        <div class="row">
         <div class="col-md-12">
-            <h3>Leads</h3>
+            <h3 style="display: inline-block;">Leads</h3>
+            <button type="button" class="btn btn-primary btn-sm" id="cmdVoltar" style="float: right; margin-top: 10px;">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Retornar a Lista
+            </button>
             <hr>
         </div>
     </div>
@@ -938,12 +941,7 @@ include_once "../inc/php/header.php";
             </div>
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-12" align="center">
-            <button type="button" class="btn" id="cmdVoltar">Retornar</button>
-        </div>
-    </div>
+        <hr>
 </div>
 
 <?php
