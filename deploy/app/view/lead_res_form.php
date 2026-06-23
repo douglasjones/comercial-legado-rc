@@ -62,7 +62,10 @@ include_once "../inc/php/header.php";
 <div class="container" id="exibir" style="display:none">
     <div class="row">
         <div class="col-md-12">
-            <h3>Pesquisa - Leads</h3>
+            <h3 style="display: inline-block;">Pesquisa - Leads</h3>
+            <button type="button" class="btn btn-primary btn-sm" id="cmdVoltarLista" style="display:none; float: right; margin-top: 10px;">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Retornar a Lista
+            </button>
             <input type="hidden" class="form-control form-control-sm" id="usuario_logado_pk">
         </div>
     </div>
@@ -392,9 +395,10 @@ include_once "../inc/php/header.php";
                 <tr>
                     <th>Cód</th>
                     <th>Lead</th>
-                    <th>Responsável</th>
+                    <th>Resp</th>
                     <th>Qtde Linhas</th>
                     <th>Tempo Contrato</th>
+                    <th>Status OC</th>
                     <th>Dt Ult OC</th>
                     <th>Ação</th>
                 </tr>

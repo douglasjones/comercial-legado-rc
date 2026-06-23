@@ -61,6 +61,72 @@ function fcUsuarioEhResponsavel(vResponsavelPk, vUsuarioPk){
     return false;
 }
 
+function fcTemPermissaoSuccess(arrPermissao){
+    return !!(arrPermissao && arrPermissao.result == 'success');
+}
+
+function fcLeadSemResponsavel(vResponsavelPk){
+    return vResponsavelPk === null || vResponsavelPk === undefined || String(vResponsavelPk).trim() === "";
+}
+
+function fcPodeAcessarLead(arrPermissao, vResponsavelPk){
+    if (fcTemPermissaoSuccess(arrPermissao)){
+        return true;
+    }
+
+    if (fcLeadSemResponsavel(vResponsavelPk)){
+        return true;
+    }
+
+    return fcUsuarioEhResponsavel(vResponsavelPk, $("#usuario_logado_pk").val());
+}
+
+function fcSalvarFiltros() {
+    var filtros = {
+        "pk": $("#id_lead").val(),
+        "ds_lead": $("#ds_lead").val(),
+        "polos_pk": $("#polos_pk").val(),
+        "ds_razao_social": $("#ds_razao_social").val(),
+        "ds_cpf_cnpj": $("#ds_cpf_cnpj").val(),
+        "tipo_pessoa_pk": $("#tipo_pessoa_pk").val(),
+        "mailing_pk": $("#mailing_pk").val(),
+        "grupos_pk": $("#grupos_pk").val(),
+        "usuarios_pk": $("#usuarios_pk").val(),
+        "status_processo_pk": $("#status_processo_pk").val(),
+        "operador_pk": $("#operador_pk").val(),
+        "classificacao_operador_pk": $("#classificacao_operador_pk").val(),
+        "qtde_linhas_ini": $("#qtde_linhas_ini").val(),
+        "qtde_linhas_fim": $("#qtde_linhas_fim").val(),
+        "ds_cidade": $("#ds_cidade").val(),
+        "tempo_contrato_pk": $("#tempo_contrato_pk").val(),
+        "ic_cliente": $("#ic_status").val(),
+        "qtde_ult_oc": $("#qtde_ult_oc").val()
+    };
+    sessionStorage.setItem("lead_filtros", JSON.stringify(filtros));
+    sessionStorage.setItem("lead_tabela_visivel", "true");
+}
+
+function fcRestaurarFiltros() {
+    var filtrosSalvos = sessionStorage.getItem("lead_filtros");
+    if (!filtrosSalvos) return false;
+
+    var filtros = JSON.parse(filtrosSalvos);
+    for (var chave in filtros) {
+        if (filtros.hasOwnProperty(chave) && filtros[chave] !== "") {
+            var $campo = $("#" + chave);
+            if ($campo.length) {
+                $campo.val(filtros[chave]);
+            }
+        }
+    }
+
+    if (filtros["grupos_pk"] && filtros["grupos_pk"] !== "") {
+        fcCarregarResponsavel(filtros["usuarios_pk"] || "");
+    }
+
+    return true;
+}
+
 function fcPesquisar(){
     var arrCarregar = permissao("lead", "cons");
 
@@ -73,6 +139,7 @@ function fcPesquisar(){
         $('#tblResultado').DataTable().clear().destroy();
     }
 
+    fcSalvarFiltros();
     fcCarregarGrid();
     $("#tabela_lead").show();
 
@@ -197,11 +264,12 @@ function fcCarregarGrid(){
                                   &nbsp;&nbsp;&nbsp;&nbsp;<a class='function_delete'><span><img width=16 height=16 src='../img/excluir.png'></span></a>"
            },
            {"targets": -2, "data": "t_ultcontato"},
-           {"targets": -3, "data": "t_tempo_contrato_pk"},
-           {"targets": -4, "data": "t_ds_qtde_voz"},
-           {"targets": -5, "data": "t_ds_usuario"},
-           {"targets": -6, "data": "t_ds_lead"},
-           {"targets": -7, "data": "t_pk"}
+           {"targets": -3, "data": "t_ds_status_oc"},
+           {"targets": -4, "data": "t_tempo_contrato_pk"},
+           {"targets": -5, "data": "t_ds_qtde_voz"},
+           {"targets": -6, "data": "t_ds_usuario"},
+           {"targets": -7, "data": "t_ds_lead"},
+           {"targets": -8, "data": "t_pk"}
 
          ],
         "language":{
@@ -230,16 +298,12 @@ function fcCarregarGrid(){
             return false;
         }
 
-        if(arrPermissao.result == 'success'){
+        if(fcPodeAcessarLead(arrPermissao, data['t_responsavel_pk'])){
             fcAbrirPainel(data['t_pk'],data['t_responsavel_pk']);
         }else{
-            if(fcUsuarioEhResponsavel(data['t_responsavel_pk'], $("#usuario_logado_pk").val())){
-                fcAbrirPainel(data['t_pk'],data['t_responsavel_pk']);
-            }else{
-                $("#alert").fadeTo(3000, 500).slideUp(500, function(){
-                    $("#alert").slideUp(500);
-                });
-            }
+            $("#alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#alert").slideUp(500);
+            });
         }
     } );
 
@@ -255,18 +319,14 @@ function fcCarregarGrid(){
             alert('Falha ao identificar o registro selecionado.');
             return false;
         }
-        if(arrPermissao.result == 'success'){
+        if(fcPodeAcessarLead(arrPermissao, data['t_responsavel_pk'])){
 
             fcEditar(data['t_pk']);
         }
         else{
-            if(fcUsuarioEhResponsavel(data['t_responsavel_pk'], $("#usuario_logado_pk").val())){
-                fcEditar(data['t_pk'],data['t_responsavel_pk']);
-            }else{
-                $("#alert").fadeTo(3000, 500).slideUp(500, function(){
-                    $("#alert").slideUp(500);
-                });
-            }
+            $("#alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#alert").slideUp(500);
+            });
 
         }
     } );
@@ -286,17 +346,13 @@ function fcCarregarGrid(){
 
 
 
-        if(arrPermissao.result == 'success'){
+        if(fcPodeAcessarLead(arrPermissao, data['t_responsavel_pk'])){
             fcExcluir(data['t_pk'], data['t_ds_lead'],data['t_responsavel_pk']);
         }
         else{
-            if(fcUsuarioEhResponsavel(data['t_responsavel_pk'], $("#usuario_logado_pk").val())){
-                fcExcluir(data['t_pk'], data['t_ds_lead'],data['t_responsavel_pk']);
-            }else{
-                $("#alert").fadeTo(3000, 500).slideUp(500, function(){
-                    $("#alert").slideUp(500);
-                });
-            }
+            $("#alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#alert").slideUp(500);
+            });
 
         }
 
@@ -304,6 +360,7 @@ function fcCarregarGrid(){
     } );
 }
 function fcAbrirPainel(v_pk,v_resposavel){
+    fcSalvarFiltros();
     sendPost('lead_main_form.php', {token: token, pk: v_pk,agenda:""});
 
 }
@@ -650,8 +707,14 @@ $(document).ready(function(){
      });
 
     //faz a carga inicial do grid.
-
-
+    var filtrosSalvos = sessionStorage.getItem("lead_filtros");
+    var tabelaVisivel = sessionStorage.getItem("lead_tabela_visivel");
+    if (filtrosSalvos && tabelaVisivel === "true") {
+        fcRestaurarFiltros();
+        window.setTimeout(function() {
+            fcPesquisar();
+        }, 1000);
+    }
 
     //Atribui os eventos dos demais controles
     $(document).on('click', '#cmdPesquisar', fcPesquisar);
