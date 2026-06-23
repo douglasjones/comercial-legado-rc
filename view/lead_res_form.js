@@ -61,6 +61,26 @@ function fcUsuarioEhResponsavel(vResponsavelPk, vUsuarioPk){
     return false;
 }
 
+function fcTemPermissaoSuccess(arrPermissao){
+    return !!(arrPermissao && arrPermissao.result == 'success');
+}
+
+function fcLeadSemResponsavel(vResponsavelPk){
+    return vResponsavelPk === null || vResponsavelPk === undefined || String(vResponsavelPk).trim() === "";
+}
+
+function fcPodeAcessarLead(arrPermissao, vResponsavelPk){
+    if (fcTemPermissaoSuccess(arrPermissao)){
+        return true;
+    }
+
+    if (fcLeadSemResponsavel(vResponsavelPk)){
+        return true;
+    }
+
+    return fcUsuarioEhResponsavel(vResponsavelPk, $("#usuario_logado_pk").val());
+}
+
 function fcSalvarFiltros() {
     var filtros = {
         "pk": $("#id_lead").val(),
@@ -278,18 +298,13 @@ function fcCarregarGrid(){
             alert('Falha ao identificar o registro selecionado.');
             return false;
         }
-        fcAbrirPainel(data['t_pk'],data['t_responsavel_pk']);
-        /*if(arrPermissao.result == 'success'){
+        if(fcPodeAcessarLead(arrPermissao, data['t_responsavel_pk'])){
             fcAbrirPainel(data['t_pk'],data['t_responsavel_pk']);
         }else{
-            if(fcUsuarioEhResponsavel(data['t_responsavel_pk'], $("#usuario_logado_pk").val())){
-                fcAbrirPainel(data['t_pk'],data['t_responsavel_pk']);
-            }else{
-                $("#alert").fadeTo(3000, 500).slideUp(500, function(){
-                    $("#alert").slideUp(500);
-                });
-            }
-        }*/
+            $("#alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#alert").slideUp(500);
+            });
+        }
     } );
 
     $('#tblResultado tbody').on('click', '.function_edit', function () {
@@ -304,18 +319,14 @@ function fcCarregarGrid(){
             alert('Falha ao identificar o registro selecionado.');
             return false;
         }
-        if(arrPermissao.result == 'success'){
+        if(fcPodeAcessarLead(arrPermissao, data['t_responsavel_pk'])){
 
             fcEditar(data['t_pk']);
         }
         else{
-            if(fcUsuarioEhResponsavel(data['t_responsavel_pk'], $("#usuario_logado_pk").val())){
-                fcEditar(data['t_pk'],data['t_responsavel_pk']);
-            }else{
-                $("#alert").fadeTo(3000, 500).slideUp(500, function(){
-                    $("#alert").slideUp(500);
-                });
-            }
+            $("#alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#alert").slideUp(500);
+            });
 
         }
     } );
@@ -335,17 +346,13 @@ function fcCarregarGrid(){
 
 
 
-        if(arrPermissao.result == 'success'){
+        if(fcPodeAcessarLead(arrPermissao, data['t_responsavel_pk'])){
             fcExcluir(data['t_pk'], data['t_ds_lead'],data['t_responsavel_pk']);
         }
         else{
-            if(fcUsuarioEhResponsavel(data['t_responsavel_pk'], $("#usuario_logado_pk").val())){
-                fcExcluir(data['t_pk'], data['t_ds_lead'],data['t_responsavel_pk']);
-            }else{
-                $("#alert").fadeTo(3000, 500).slideUp(500, function(){
-                    $("#alert").slideUp(500);
-                });
-            }
+            $("#alert").fadeTo(3000, 500).slideUp(500, function(){
+                $("#alert").slideUp(500);
+            });
 
         }
 
