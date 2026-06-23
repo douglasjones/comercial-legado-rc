@@ -663,6 +663,7 @@ switch($job){
                     "t_qtde_dias"=>$query[$i]['qtde_dias'],
                     "t_ultcontato"=>$query[$i]['ultcontato'],
                     "t_responsavel_pk"=>$query[$i]['responsavel_pk'],
+                    "t_ds_status_oc"=>$query[$i]['ds_status_oc'],
                               "t_functions" => ""
                 );
             }

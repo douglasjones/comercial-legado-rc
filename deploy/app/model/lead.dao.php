@@ -304,10 +304,12 @@ class leaddao{
         $sql.= "        ,DATEDIFF(sysdate(), max(l.dt_ult_ocorrencia)) qtde_dias";
         $sql.= "        ,date_format(max(l.dt_ult_ocorrencia), '%d/%m/%Y %H:%i:%s') ultcontato";
         $sql.= "        ,ANY_VALUE(lr.usuarios_pk) responsavel_pk";
+        $sql.= "        ,ANY_VALUE(tio_ult.ds_tipo_ocorrencia) ds_status_oc";
         $sql.= "    FROM leads l";
         $sql.= "          Left JOIN leads_responsaveis lr ON lr.leads_pk = l.pk";
         $sql.= "          Left JOIN usuarios u ON lr.usuarios_pk = u.pk";
         $sql.= "          Left JOIN leads_operadoras lo ON lo.leads_pk = l.pk";
+        $sql.= "          LEFT JOIN tipos_ocorrencias tio_ult ON tio_ult.pk = l.ocorrencias_ult_pk";
         if(!empty($equipes_pk)){
             $sql.= "          LEFT JOIN equipes_usuarios eu ON lr.usuarios_pk = eu.usuarios_pk";
         }
